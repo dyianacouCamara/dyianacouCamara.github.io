@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        *{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+        }
+
+        input, select {
+            margin-bottom: 2%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        
+        fieldset {
+            padding-top: 1%;
+        }
+
+        input[type=button], h1, select {
+            margin-top: 2%;
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            document.getElementById("contar").addEventListener("click", () => {
+                let fila = document.getElementById("fila").value;
+                let mes = document.getElementById("mes").value;
+                let expSueltos = Number(document.getElementById("expSueltos").value);
+                let totalExp = 0;
+                let counter = 0;
+
+                for(let i = 1; i <= fila; i++) {
+                    if(i % 23 != 0) {
+                        counter++;
+                    }
+                }
+
+                totalExp = (((counter/22)*5)+expSueltos);
+                document.getElementById("respuesta").innerHTML = `${'El número de expedientes que hay en ' + mes + ' = ' + totalExp}`;
+            });
+
+            document.getElementById("reset").addEventListener("click", () => {
+                document.getElementById("fila").value = "";
+                document.getElementById("mes").value = "";
+                document.getElementById("expSueltos").value = "";
+                document.getElementById("respuesta").innerHTML = "";
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>¡Vamos a contar los expedientes!</h1>
+    <div>
+        <form action="" method="post">
+            <fieldset>
+                <!--<legend>Contar los expedientes</legend>-->
+                Mes: <select name="mes" id="mes">
+                    <option value=""></option>
+                    <optgroup label="Trimestre 1">
+                        <option value="enero">Enero</option>
+                        <option value="febrero">Febrero</option>
+                        <option value="marzo">Marzo</option>
+                    </optgroup>
+                    <optgroup label="Trimestre 2">
+                        <option value="abril">Abril</option>
+                        <option value="mayo">Mayo</option>
+                        <option value="junio">Junio</option>
+                    </optgroup>
+                    <optgroup label="Trimestre 3">
+                        <option value="julio">Julio</option>
+                        <option value="agosto">Agosto</option>
+                        <option value="septiembre">Septiembre</option>
+                    </optgroup>
+                    <optgroup label="Trimestre 4">
+                        <option value="octubre">Octubre</option>
+                        <option value="noviembre">Noviembre</option>
+                        <option value="diciembre">Diciembre</option>
+                    </optgroup>
+                </select><br>
+                Última fila del Excel con 5 expedientes: <input type="number" name="fila" id="fila"><br>
+                Número de expedientes sueltos de la última fila: <input type="number" name="expSueltos" id="expSueltos"><br>
+            </fieldset>
+            <input type="button" value="Contar" id="contar">
+            <input type="button" value="Reset" id="reset">
+        </form>
+    </div>
+    <p id="respuesta"></p>
+</body>
+</html>
